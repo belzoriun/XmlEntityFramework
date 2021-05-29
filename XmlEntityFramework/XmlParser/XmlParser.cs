@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,16 +12,11 @@ namespace XmlEntityFramework.XmlParser
 {
     class XmlParser
     {
-        public void ParseFromString(string xmlData)
+        public dynamic Parse(string xmlData)
         {
             XDocument doc = XDocument.Parse(xmlData); //or XDocument.Load(path)
             string jsonText = JsonConvert.SerializeXNode(doc);
-            dynamic dyn = JsonConvert.DeserializeObject<ExpandoObject>(jsonText);
-        }
-
-        public void ParseFromFile(string path)
-        {
-
+            return JsonConvert.DeserializeObject<ExpandoObject>(jsonText);
         }
     }
 }
